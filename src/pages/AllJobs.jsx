@@ -30,22 +30,24 @@ export default function JobsComponent() {
   }, [url]);
 
   return (
-    <div className="allJobs">
-      <h1>Jobs List</h1>
-      {error ? (
-        <p>Error fetching data: {error}</p>
-      ) : (
-        <ul>
-          {jobs.map((job) => (
-            <div className="jobCards" key={job.id}>
-              <h2>{job.fields.Title} </h2>
-              <h4>{job.fields.Where}</h4>
-              <p>{job.fields.Description}</p>
-              <hr></hr>
-            </div>
-          ))}
-        </ul>
-      )}
-    </div>
+    <>
+      <div className="allJobs">
+        <h1>Jobs List</h1>
+        {error ? (
+          <p>Error fetching data: {error}</p>
+        ) : (
+          <ul>
+            {jobs.map((job) => (
+              <div className="jobCards" key={job.id}>
+                <h2>{job.fields.Title} </h2>
+                <h4>{job.fields.Where}</h4>
+                <p>{job.fields.Description}</p>
+                <hr></hr>
+              </div>
+            ))}
+          </ul>
+        )}
+      </div>
+    </>
   );
 }
