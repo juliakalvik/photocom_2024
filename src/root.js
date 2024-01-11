@@ -1,6 +1,6 @@
 import { Router, Route, RootRoute } from "@tanstack/react-router";
 
-import JobsComponent from "./pages/NewJob";
+import JobsComponent from "./pages/AllJobs";
 import Root from "./App";
 
 const rootRoute = new RootRoute({

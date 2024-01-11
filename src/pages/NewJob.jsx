@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function JobsComponent() {
+export default function NewJobComponent() {
   const [jobs, setJobs] = useState([]);
   const [error, setError] = useState(null);
   const url = `https://api.airtable.com/v0/appmx6fWRWyfBRG5F/tblqU7nF5ckbznwU8`;
