@@ -19,9 +19,9 @@ export default function JobsComponent() {
         }
 
         const fetchedJobs = await response.json();
-        setJobs(fetchedJobs.records); // Assuming that jobs are in the 'records' property
+        setJobs(fetchedJobs.records);
       } catch (error) {
-        setError(error.message); // Set error state
+        setError(error.message);
         console.error("Error fetching data:", error);
       }
     };
