@@ -1,31 +1,13 @@
 import pb from "./lib/pocketbase";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
+import useLogin from "./hooks/useLogin";
+import useLogout from "./hooks/useLogout";
 
 export default function Auth() {
-  const [isLoading, setLoading] = useState(false);
-  const [dummy, setDummy] = useState(0);
+  const { isLoading, login } = useLogin();
+  const { dummy, logout } = useLogout();
   const { register, handleSubmit, reset } = useForm();
-
   const isLoggedIn = pb.authStore.isValid;
-
-  async function login(data) {
-    setLoading(true);
-    try {
-      const authData = await pb
-        .collection("users")
-        .authWithPassword(data.email, data.password);
-    } catch (e) {
-      alert(e);
-    }
-    setLoading(false);
-    reset();
-  }
-
-  function logout() {
-    pb.authStore.clear();
-    setDummy(Math.random());
-  }
 
   if (isLoggedIn) {
     return (
@@ -40,7 +22,7 @@ export default function Auth() {
     <>
       {isLoading && <p>Loading...</p>}
       <h1>Please log in</h1>
-      <form onSubmit={handleSubmit(login)}>
+      <form onSubmit={handleSubmit((data) => login(data, reset))}>
         <input type="text" placeholder="email" {...register("email")} />
         <input
           type="password"
@@ -48,12 +30,8 @@ export default function Auth() {
           {...register("password")}
         />
 
-        <button
-          type="submit"
-          disabled={isLoading}
-          {...(isLoading ? "Loading" : "Login")}
-        >
-          Log in
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? "Loading" : "Login"}
         </button>
       </form>
     </>
