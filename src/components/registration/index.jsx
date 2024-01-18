@@ -31,7 +31,6 @@ export default function RegistrationForm() {
       name: nameValue,
     };
 
-    // Call the registerUser function
     await registerUser(userData);
   };
 
