@@ -1,9 +1,5 @@
-import SideNav, {
-  Toggle,
-  NavItem,
-  NavIcon,
-  NavText,
-} from "@trendmicro/react-sidenav";
+import { Link } from "@tanstack/react-router";
+import SideNav, { NavItem, NavIcon, NavText } from "@trendmicro/react-sidenav";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 import "./style.css";
 
@@ -22,25 +18,31 @@ function SideNavbar() {
             <NavIcon>
               <i className="fa fa-fw fa-home" style={{ fontSize: "1.5" }}></i>
             </NavIcon>
-            <NavText>Home</NavText>
+            <NavText>
+              <Link to="/home">Home</Link>
+            </NavText>
           </NavItem>
-          <NavItem eventKey="new job">
+          <NavItem eventKey="new-job">
             <NavIcon>
               <i
                 className="fa fa-fw fa-file-circle-plus"
                 style={{ fontSize: "1.5" }}
               ></i>
             </NavIcon>
-            <NavText>New Job</NavText>
+            <NavText>
+              <Link to="/newjob">New Job</Link>
+            </NavText>
           </NavItem>
-          <NavItem eventKey="my jobs">
+          <NavItem eventKey="myjobs">
             <NavIcon>
               <i
                 className="fa fa-fw fa-solid fa-camera"
                 style={{ fontSize: "1.5" }}
               ></i>
             </NavIcon>
-            <NavText>My jobs</NavText>
+            <NavText>
+              <Link to="/myjobs">My Jobs</Link>
+            </NavText>
           </NavItem>
         </SideNav.Nav>
       </SideNav>

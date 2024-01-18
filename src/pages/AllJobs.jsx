@@ -32,7 +32,7 @@ export default function JobsComponent() {
   return (
     <>
       <div className="allJobs">
-        <h1>Jobs List</h1>
+        <h1>Jobs List ALL JOBS</h1>
         {error ? (
           <p>Error fetching data: {error}</p>
         ) : (
