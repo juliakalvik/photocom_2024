@@ -29,7 +29,7 @@ export default function ListingForm() {
         <div key={item.collectionId}>
           <p>{item.title}</p>
           <p>Budget: {item.budget}</p>
-          <p>When: {item.datetime}</p>
+          <p>When: {item.date}</p>
           <p>Where: {item.place}</p>
           <p>Type of shoot: {item.type}</p>
           <p>Description: {item.description}</p>

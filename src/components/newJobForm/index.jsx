@@ -37,11 +37,11 @@ export default function ListingForm() {
 
   const submitListingForm = async (event) => {
     event.preventDefault();
-    const { title, budget, datetime, place, type, description } =
+    const { title, budget, date, place, type, description } =
       event.target.elements;
     const titleValue = title.value;
     const budgetValue = budget.value;
-    const datetimeValue = datetime.value;
+    const dateValue = date.value;
     const placeValue = place.value;
     const typeValue = type.value;
     const descriptionValue = description.value;
@@ -50,7 +50,7 @@ export default function ListingForm() {
     const listingData = {
       title: titleValue,
       budget: budgetValue,
-      datetime: datetimeValue,
+      date: dateValue,
       place: placeValue,
       type: typeValue,
       description: descriptionValue,
@@ -75,8 +75,8 @@ export default function ListingForm() {
         </div>
 
         <div>
-          <label>Datetime:</label>
-          <input type="datetime-local" name="datetime" required />
+          <label>Date:</label>
+          <input type="date-local" name="date" required />
         </div>
 
         <div>
