@@ -1,11 +1,24 @@
 import { useState } from "react";
 import PocketBase from "pocketbase";
 import { IsUserLoggedIn } from "../../hooks/getUser";
+import { GetUser } from "../../hooks/getUser";
 
 const pb = new PocketBase("https://photocom.pockethost.io/");
 
 export default function ListingForm() {
   const [isCreatingListing, setCreatingListing] = useState(false);
+  const jobType = [
+    "Wedding",
+    "Event",
+    "Campaign",
+    "Commercial",
+    "Family",
+    "Engagement",
+    "Styled shoot",
+    "Other",
+  ];
+
+  console.log(GetUser());
 
   async function createListing(data) {
     setCreatingListing(true);
@@ -32,6 +45,7 @@ export default function ListingForm() {
     const placeValue = place.value;
     const typeValue = type.value;
     const descriptionValue = description.value;
+    const user = GetUser();
 
     const listingData = {
       title: titleValue,
@@ -40,6 +54,7 @@ export default function ListingForm() {
       place: placeValue,
       type: typeValue,
       description: descriptionValue,
+      user: user.id,
     };
 
     await createListing(listingData);
@@ -72,7 +87,13 @@ export default function ListingForm() {
         <div>
           <label>Type:</label>
           <select type="select" name="type" required>
-            <option value="volvo">Engagement</option>
+            {jobType.map((item) => {
+              return (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              );
+            })}
           </select>
         </div>
 
