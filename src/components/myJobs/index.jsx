@@ -16,12 +16,11 @@ async function fetchUserJobs(id) {
   return userPosts.items;
 }
 
-export default function Profile() {
-  const [userJobs, setUserJobs] = useState(["loading"]);
+export default function MyJobs() {
+  const [userJobs, setUserJobs] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log(pb.authStore.model.id);
       const jobs = await fetchUserJobs(pb.authStore.model.id);
       setUserJobs(jobs);
     };
@@ -34,28 +33,29 @@ export default function Profile() {
   if (!isLoggedIn) {
     return <h1>Please log in to view your profile.</h1>;
   }
-
-  const currentUser = pb.authStore.model;
-  console.log(currentUser);
-
   return (
     <>
-      <h1>My profile</h1>
-      <p>Name: {currentUser.name}</p>
-      <p>Email: {currentUser.email}</p>
-      {userJobs.map((item) => (
+      <h1>My jobs:</h1>
+      {!userJobs && <p>Loading...</p>}
+      {userJobs?.map((item) => (
         <Card
           sx={{
             textAlign: "left",
             maxWidth: 600,
             m: 2,
-            p: 2,
+            p: 4,
           }}
           key={item.id}
         >
           <Link to={`/onejob/?id=${item.id}`}>
             <h3>{item.title}</h3>
           </Link>
+          <p>Budget: {item.budget} NOK</p>
+          <p>When: {item.date}</p>
+          <p>Where: {item.place}</p>
+          <p>Type of shoot: {item.type}</p>
+          <p>Description: {item.description}</p>
+          <p>Job listed by you.</p>
         </Card>
       ))}
     </>

@@ -6,7 +6,6 @@ import NewJobComponent from "./pages/NewJob";
 import HomePage from "./pages/Home";
 import AllPhotographers from "./pages/AllPhotographers";
 import MyJobs from "./pages/MyJobs";
-import OneJob from "./components/oneJob";
 import JobSpecificPage from "./pages/OneJob";
 import ProfilePage from "./pages/Profile";
 

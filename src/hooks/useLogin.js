@@ -7,9 +7,7 @@ export default function useLogin() {
   async function login(data, reset) {
     setLoading(true);
     try {
-      const authData = await pb
-        .collection("users")
-        .authWithPassword(data.email, data.password);
+      await pb.collection("users").authWithPassword(data.email, data.password);
     } catch (e) {
       alert(e);
     }

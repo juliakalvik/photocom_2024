@@ -6,7 +6,7 @@ import useLogout from "./hooks/useLogout";
 
 export default function Auth() {
   const { isLoading, login } = useLogin();
-  const { dummy, logout } = useLogout();
+  const { logout } = useLogout();
   const { register, handleSubmit, reset } = useForm();
   const isLoggedIn = pb.authStore.isValid;
 

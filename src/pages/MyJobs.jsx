@@ -1,7 +1,9 @@
-export default function MyJobs() {
+import MyJobs from "../components/myJobs";
+
+export default function MyJobsPage() {
   return (
     <>
-      <h1>List of my jobs on PhotoCom</h1>
+      <MyJobs />
     </>
   );
 }
