@@ -6,6 +6,8 @@ import NewJobComponent from "./pages/NewJob";
 import HomePage from "./pages/Home";
 import AllPhotographers from "./pages/AllPhotographers";
 import MyJobs from "./pages/MyJobs";
+import OneJob from "./components/oneJob";
+import JobSpecificPage from "./pages/OneJob";
 
 const rootRoute = new RootRoute({
   component: Root,
@@ -21,6 +23,12 @@ const allJobsRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "/alljobs",
   component: JobsComponent,
+});
+
+const oneJobRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: "/onejob",
+  component: JobSpecificPage,
 });
 
 const allPhotographersRoute = new Route({
@@ -54,6 +62,7 @@ const routeTree = rootRoute.addChildren([
   allPhotographersRoute,
   homeRoute,
   myJobsRoute,
+  oneJobRoute,
 ]);
 
 export const router = new Router({ routeTree });

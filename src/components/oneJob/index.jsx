@@ -1,36 +1,37 @@
 import { useEffect, useState } from "react";
 import PocketBase from "pocketbase";
-import { Link } from "@tanstack/react-router";
 
-async function fetchJobsList() {
+async function fetchJob() {
   const pb = new PocketBase("https://photocom.pockethost.io/");
   const records = await pb
     .collection("jobs")
-    .getList(1, 30, { expand: "user" });
+    .getOne("RECORD_ID", { expand: "relField1,relField2.subRelField" });
+  if (!records) {
+    console.error("Record not found");
+    return;
+  }
   return records.items;
 }
 
-export default function ListingForm() {
-  const [jobList, setJobList] = useState(["loading"]);
+export default function OneJob() {
+  const [oneJob, setOneJob] = useState(["loading"]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const jobs = await fetchJobsList();
-      setJobList(jobs);
+      const job = await fetchJob();
+      setOneJob(job);
     };
 
     fetchData();
   }, []);
-  console.log(jobList);
+  console.log(oneJob);
 
   return (
     <>
-      <h1>Scroll through jobs here</h1>
-      {jobList.map((item) => (
-        <div key={item.collectionId}>
-          <Link to={`/onejob/${item.id}`}>
-            <p>{item.title}</p>
-          </Link>
+      <h1>Job specific page</h1>
+      {oneJob.map((item) => (
+        <div key={item.id}>
+          <p>{item.title}</p>
           <p>Budget: {item.budget}</p>
           <p>When: {item.date}</p>
           <p>Where: {item.place}</p>
