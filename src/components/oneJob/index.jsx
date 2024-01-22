@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import PocketBase from "pocketbase";
 
 async function fetchJob() {
+  const searchParams = new URLSearchParams(window.location.search);
+  let id = searchParams.get("id");
   const pb = new PocketBase("https://photocom.pockethost.io/");
-  const records = await pb
-    .collection("jobs")
-    .getOne("RECORD_ID", { expand: "relField1,relField2.subRelField" });
+  const records = await pb.collection("jobs").getOne(id, { expand: "user" });
   if (!records) {
     console.error("Record not found");
     return;
   }
-  return records.items;
+  return records;
 }
 
 export default function OneJob() {
@@ -24,22 +24,18 @@ export default function OneJob() {
 
     fetchData();
   }, []);
-  console.log(oneJob);
 
   return (
     <>
       <h1>Job specific page</h1>
-      {oneJob.map((item) => (
-        <div key={item.id}>
-          <p>{item.title}</p>
-          <p>Budget: {item.budget}</p>
-          <p>When: {item.date}</p>
-          <p>Where: {item.place}</p>
-          <p>Type of shoot: {item.type}</p>
-          <p>Description: {item.description}</p>
-          <p>Job listed by: {item?.expand?.user?.name}</p>
-        </div>
-      ))}
+      <div key={oneJob.id}>
+        <p>{oneJob.title}</p>
+        <p>Budget: {oneJob.budget}</p>
+        <p>When: {oneJob.date}</p>
+        <p>Where: {oneJob.place}</p>
+        <p>Type of shoot: {oneJob.type}</p>
+        <p>Description: {oneJob.description}</p>
+      </div>
     </>
   );
 }

@@ -18,17 +18,15 @@ export default function ListingForm() {
       const jobs = await fetchJobsList();
       setJobList(jobs);
     };
-
     fetchData();
   }, []);
-  console.log(jobList);
 
   return (
     <>
       <h1>Scroll through jobs here</h1>
       {jobList.map((item) => (
-        <div key={item.collectionId}>
-          <Link to={`/onejob/${item.id}`}>
+        <div key={item.id}>
+          <Link to={`/onejob/?id=${item.id}`}>
             <p>{item.title}</p>
           </Link>
           <p>Budget: {item.budget}</p>
