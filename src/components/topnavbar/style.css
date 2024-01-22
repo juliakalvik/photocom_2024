@@ -1,0 +1,12 @@
+.topnav {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  gap: 2vw;
+  cursor: pointer;
+}
+
+.sidenav---navitem---9uL5T {
+  display: flex;
+  gap: 5px;
+}
